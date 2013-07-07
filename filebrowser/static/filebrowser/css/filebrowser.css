@@ -33,6 +33,11 @@
     padding-bottom: 0 !important;
 }
 
+.filebrowser td.fb_thumbnail img {
+    height: 65px;
+    width: 78px;
+}
+
 
 
 /*  Filebrowser Buttons & Links
