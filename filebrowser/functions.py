@@ -287,9 +287,13 @@ def version_generator(value, version_prefix, force=None):
             import ImageFile
     ImageFile.MAXBLOCK = IMAGE_MAXBLOCK # default is 64k
     
+ 
     try:
+        import cStringIO
+                
         im = Image.open(smart_str(os.path.join(fb_settings.MEDIA_ROOT, value)))
         version_path = get_version_path(value, version_prefix)
+        print version_path
         absolute_version_path = smart_str(os.path.join(fb_settings.MEDIA_ROOT, version_path))
         version_dir = os.path.split(absolute_version_path)[0]
         if not os.path.isdir(version_dir):
@@ -324,10 +328,12 @@ def scale_and_crop(im, width, height, opts):
         r = max(xr/x, yr/y)
     else:
         r = min(xr/x, yr/y)
-    
+ 
     if r < 1.0 or (r > 1.0 and 'upscale' in opts):
-        im = im.resize((int(x*r), int(y*r)), resample=Image.ANTIALIAS)
-    
+        try:
+            im = im.resize((int(x*r), int(y*r)), resample=Image.ANTIALIAS)
+        except IOError, e:
+            print e
     if 'crop' in opts:
         x, y   = [float(v) for v in im.size]
         ex, ey = (x-min(x, xr))/2, (y-min(y, yr))/2

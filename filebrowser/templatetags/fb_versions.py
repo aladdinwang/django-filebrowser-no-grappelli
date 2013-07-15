@@ -46,10 +46,12 @@ class VersionNode(Node):
                 # create version
                 version_path = version_generator(url_to_path(source), version_prefix)
             elif os.path.getmtime(smart_str(os.path.join(fb_settings.MEDIA_ROOT, url_to_path(source)))) > os.path.getmtime(smart_str(os.path.join(fb_settings.MEDIA_ROOT, version_path))):
-                # recreate version if original image was updated
+                # recreate version if original image was updatedb
                 version_path = version_generator(url_to_path(source), version_prefix, force=True)
             return path_to_url(version_path)
-        except:
+        except BaseException, be:
+            import traceback
+            traceback.print_stack()
             return ""
 
 

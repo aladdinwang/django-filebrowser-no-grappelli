@@ -6,7 +6,7 @@
 {% ifequal value.filetype "Image" %}
 <p class="help" id="help_{{ final_attrs.id }}">
     <a href="{{ value.url_full }}" target="_blank" id="link_{{ final_attrs.id }}">
-        <img id="image_{{ final_attrs.id }}" src="{{ value.url_full }}" class="preview" />
+        <img id="image_{{ final_attrs.id }}" src="{% version value.path final_attrs.ADMIN_THUMBNAIL %}" class="preview" />
     </a>
 </p>
 {% else %}
