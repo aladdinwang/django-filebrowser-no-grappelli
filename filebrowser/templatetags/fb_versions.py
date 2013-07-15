@@ -50,8 +50,6 @@ class VersionNode(Node):
                 version_path = version_generator(url_to_path(source), version_prefix, force=True)
             return path_to_url(version_path)
         except BaseException, be:
-            import traceback
-            traceback.print_stack()
             return ""
 
 

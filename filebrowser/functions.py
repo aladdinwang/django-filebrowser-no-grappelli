@@ -330,10 +330,8 @@ def scale_and_crop(im, width, height, opts):
         r = min(xr/x, yr/y)
  
     if r < 1.0 or (r > 1.0 and 'upscale' in opts):
-        try:
-            im = im.resize((int(x*r), int(y*r)), resample=Image.ANTIALIAS)
-        except IOError, e:
-            print e
+        im = im.resize((int(x*r), int(y*r)), resample=Image.ANTIALIAS)
+        
     if 'crop' in opts:
         x, y   = [float(v) for v in im.size]
         ex, ey = (x-min(x, xr))/2, (y-min(y, yr))/2
